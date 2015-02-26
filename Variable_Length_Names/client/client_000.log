@@ -1,0 +1,9 @@
+Environment Variable NDN_TRAFFIC_LOGFOLDER Not Set.
+Using Default Output For Logging.
+2015-Feb-26 02:46:22 - Analyzing Traffic Configuration File: NDN_Traffic_Client_000
+2015-Feb-26 02:46:22 - Traffic Configuration File Processing Completed
+
+Traffic Pattern Type #1
+TrafficPercentage=100, Name=/abcde/fghij/klmno/, NameAppendSequenceNumber=1, MustBeFresh=1
+
+2015-Feb-26 02:46:22 - ERROR: error while connecting to the forwarder (No such file or directory)

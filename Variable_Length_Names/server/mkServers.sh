@@ -7,7 +7,7 @@ chmod 755 ../configServers.sh
 echo "source ~/.topology" >> ../configServers.sh
 echo "CWD=\`pwd\`" >> ../configServers.sh
 
-echo " ssh \$h4x1 \"cd \$CWD/server ; ./config_server.sh udp4\" " >> ../configServers.sh
+echo "ssh \$$h4x1 \"cd \$CWD/server ; ./config_server.sh udp4\" " >> ../configServers.sh
 
 echo "#!/bin/bash" > ../runTrafficServers.sh
 chmod 755 ../runTrafficServers.sh

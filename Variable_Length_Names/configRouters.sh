@@ -17,15 +17,18 @@ CWD=`pwd`
 
 
 # 1x1
-ssh $h1x1 "cd $CWD/ ;
-          nfdc create udp4://h3x1:6363 ;
-          nfdc create udp4://h2x1:6363 ;
-          nfdc create udp4://h7x2:6363 ;
-          nfdc create udp4://h8x2:6363 ;          
-          nfdc add-nexthop -c 1 / udp4://h3x1:6363;
-          nfdc add-nexthop -c 1 / udp4://h2x1:6363;
-          nfdc add-nexthop -c 1 / udp4://h7x2:6363"
-
+ssh $h1x1 <<'ENDSSH'
+	  source ~/.topology
+	  cd $CWD/
+	  nfdc create udp4://h3x1:6363
+          nfdc create udp4://h2x1:6363
+          nfdc create udp4://h7x2:6363 
+          nfdc create udp4://h8x2:6363           
+          nfdc add-nexthop -c 1 / udp4://h3x1:6363
+          nfdc add-nexthop -c 1 / udp4://h2x1:6363
+          nfdc add-nexthop -c 1 / udp4://h7x2:6363
+ENDSSH
+echo "this worked"
 # 2x1
 ssh $h2x1 "cd $CWD/ ;
           nfdc create udp4://h8x2:6363 ;

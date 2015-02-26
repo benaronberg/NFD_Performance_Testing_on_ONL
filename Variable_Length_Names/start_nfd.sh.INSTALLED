@@ -23,18 +23,4 @@ nfd_ready()
 count=0
 nfd --config nfd.conf >& /tmp/nfd.log &
 
-while true
-do
-  ready=$(nfd_ready)
-  if [  "$ready" = "READY" ]
-  then
-    #echo "NFD is ready"
-    exit 0
-  else
-    #echo "NFD is NOT ready count = $count"
-    count=$(($count+1))
-  fi
-
-done
-
-
+nfd_ready
