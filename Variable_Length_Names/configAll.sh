@@ -13,6 +13,4 @@ CWD=`pwd`
 
 ./configServers.sh ${PROTO}
 ./configClients.sh ${PROTO}
-
-#echo "ssh ${!RTR_HOST} \"cd $CWD/rtr; ./configRtr $PROTO\""
-ssh ${!RTR_HOST} "cd $CWD/rtr; ./configRtr.sh $PROTO"
+./configRouters.sh ${PROTO}

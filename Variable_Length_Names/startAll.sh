@@ -18,23 +18,8 @@ do
 done
 
 # Start Rtr
-echo "start nfd on router"
-ssh ${!RTR_HOST} "cd $CWD; ./start_nfd.sh"
-
-echo "start nrd on all servers"
-for s in $SERVER_HOSTS 
+echo "start nfd on routers"
+for s in $RTR_HOSTS 
 do
-  ssh ${!s} "cd $CWD ; ./start_nrd.sh" 
+  ssh ${!s} "cd $CWD ; ./start_nfd.sh" 
 done
-
-echo "start nrd on all clients"
-for s in $CLIENT_HOSTS 
-do
-  ssh ${!s} "cd $CWD ; ./start_nrd.sh" 
-done
-
-# Start Rtr
-echo "start nrd on router"
-ssh ${!RTR_HOST} "cd $CWD; ./start_nrd.sh"
-
-
