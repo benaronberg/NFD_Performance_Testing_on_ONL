@@ -1,7 +1,7 @@
 Environment Variable NDN_TRAFFIC_LOGFOLDER Not Set.
 Using Default Output For Logging.
-2015-Mar-26 02:17:24 - Analyzing Traffic Configuration File: NDN_Traffic_Server_000
-2015-Mar-26 02:17:24 - Traffic Configuration File Processing Completed
+2015-Mar-26 10:06:49 - Analyzing Traffic Configuration File: NDN_Traffic_Server_000
+2015-Mar-26 10:06:49 - Traffic Configuration File Processing Completed
 
 Traffic Pattern Type #1
 Name=/abcde/fghij/klmno/, ContentType=1, ContentBytes=800
