@@ -1,7 +1,14 @@
 #!/bin/bash
 source ../hosts
+source ~/.topology
 
-nfdc create udp4://h1x1:6363
+PROTO="udp4"
+
+echo "$h4x1"
+echo "nfdc create ${PROTO}://\$${SERVER_HOSTS}:6363"
+echo "nfdc add-nexthop -c 1 / ${PROTO}://\$${SERVER_HOSTS}:6363"
+
+nfdc create ${PROTO}://$h4x1:6363
 #nfdc add-nexthop -c 1 / 4 
-nfdc add-nexthop -c 1 / udp4://h1x1:6363
+nfdc add-nexthop -c 1 / ${PROTO}://$h4x1:6363
 

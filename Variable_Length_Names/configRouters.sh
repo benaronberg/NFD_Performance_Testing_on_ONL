@@ -17,20 +17,19 @@ CWD=`pwd`
 
 
 # 1x1
-ssh $h1x1 <<'ENDSSH'
-	  source ~/.topology
-	  cd $CWD/
-	  nfdc create udp4://h3x1:6363
-          nfdc create udp4://h2x1:6363
-          nfdc create udp4://h7x2:6363 
-          nfdc create udp4://h8x2:6363           
-          nfdc add-nexthop -c 1 / udp4://h3x1:6363
-          nfdc add-nexthop -c 1 / udp4://h2x1:6363
-          nfdc add-nexthop -c 1 / udp4://h7x2:6363
-ENDSSH
-echo "this worked"
+ssh $h1x1 "source ~/.topology ;
+	  cd $CWD/ ;
+	  nfdc create udp4://h3x1:6363 ;
+          nfdc create udp4://h2x1:6363 ;
+          nfdc create udp4://h7x2:6363 ;
+          nfdc create udp4://h8x2:6363 ;         
+          nfdc add-nexthop -c 1 /zzz udp4://h3x1:6363 ;
+          nfdc add-nexthop -c 1 / udp4://h2x1:6363 ;
+          nfdc add-nexthop -c 1 /ccc udp4://h7x2:6363"
+
 # 2x1
 ssh $h2x1 "cd $CWD/ ;
+	  source ~/.topology ;
           nfdc create udp4://h8x2:6363 ;
           nfdc create udp4://h3x1:6363 ;
           nfdc create udp4://h2x1:6363 ;  
@@ -38,6 +37,7 @@ ssh $h2x1 "cd $CWD/ ;
 
 # 3x1
 ssh $h3x1 "cd $CWD/ ;
+          source ~/.topology ;
           nfdc create udp4://h1x1:6363 ;
           nfdc create udp4://h2x1:6363 ;
           nfdc create udp4://h5x2:6363 ;  
@@ -45,11 +45,13 @@ ssh $h3x1 "cd $CWD/ ;
 
 # 4x1 (server)
 ssh $h4x1 "cd $CWD/ ;
+           source ~/.topology ;
            nfdc create udp4://h5x2:6363 ;
            nfdc add-nexthop -c 1 / udp4://h5x2:6363"
 
 # 5x2
 ssh $h5x2 "cd $CWD/ ;
+          source ~/.topology ;
            nfdc create udp4://h3x1:6363 ;
            nfdc create udp4://h4x1:6363 ;
            nfdc create udp4://h6x1:6363 ;
@@ -58,6 +60,7 @@ ssh $h5x2 "cd $CWD/ ;
 
 # 6x1
 ssh $h6x1 "cd $CWD/ ;
+          source ~/.topology ;
            nfdc create udp4://h2x1:6363 ;
            nfdc create udp4://h5x2:6363 ;
            nfdc create udp4://h7x2:6363 ; 
@@ -65,6 +68,7 @@ ssh $h6x1 "cd $CWD/ ;
 
 # 7x2
 ssh $h7x2 "cd $CWD/ ;
+          source ~/.topology ;
            nfdc create udp4://h1x1:6363 ;
            nfdc create udp4://h6x1:6363 ;
            nfdc create udp4://h5x2:6363 ; 
@@ -72,5 +76,6 @@ ssh $h7x2 "cd $CWD/ ;
 
 # 8x2 (client)
 ssh $h8x2 "cd $CWD/ ; 
+          source ~/.topology ;
            nfdc create udp4://h1x1:6363 ;
            nfdc add-nexthop -c 1 / udp4://h1x1:6363"
