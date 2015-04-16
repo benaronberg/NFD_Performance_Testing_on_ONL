@@ -31,6 +31,11 @@ do
   ssh ${!s} "killall nfd"
 done
 
+for s in $RTR_HOSTS
+do
+  ssh ${!s} "killall nlsr"
+done
+
 echo "sleep 10 to give nfd from clients and servers to dump gmon.out if they are. Then rtr can be the last"
 
 sleep 10
