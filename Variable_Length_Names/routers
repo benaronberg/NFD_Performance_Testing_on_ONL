@@ -1,0 +1,6 @@
+ROUTER_CONFIG=("mccoy:colostate:h1x1:192.168.1.1:ndnx:ndn0:hobo"
+                "ndnx:illinois:h2x1:192.168.2.1:mccoy:ndn0:wundngw"
+                "ndn0:umich:h3x1:192.168.3.1:mccoy:wundngw:titan"
+                "titan:memphis:h5x2:192.168.5.2:ndn0:wundngw:hobo"
+                "wundngw:wustl:h6x1:192.168.6.1:hobo:titan:ndnx"
+                "hobo:arizona:h7x2:192.168.7.2:wundngw:mccoy:titan")
