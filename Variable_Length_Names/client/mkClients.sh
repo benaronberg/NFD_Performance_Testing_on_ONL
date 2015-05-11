@@ -1,47 +1,20 @@
 #!/bin/bash
 
-if [ $# -eq 5 ]
-then
-  COUNT=$1
-  PROTO=$2
-  INTERVAL=$3
-  NUM_COMPONENTS=$4
-  COMPONENT_LEN=$5
-else
-  echo "Usage: $0 <count> <proto> <interval> <num name components> <component length>"
-  exit 0
-fi
-
 source ../hosts
 
-INDEX=0
-#CLIENT_HOSTS="h1x2 h1x3 h1x4 h1x5 h4x2 h4x3 h4x4 h4x5"
-NUMHOSTS=0
-INDEX=0
 echo "#!/bin/bash" > ../configClients.sh
 chmod 755 ../configClients.sh
 echo "source ~/.topology" >> ../configClients.sh
 echo "CWD=\`pwd\`" >> ../configClients.sh
-for s in $CLIENT_HOSTS 
-do
- #echo $s
- HOST_LIST[$INDEX]="$s"
- INDEX=$(($INDEX+1))
- NUMHOSTS=$(($NUMHOSTS+1))
- echo " ssh \$$s \"cd \$CWD/client ; ./config_client.sh ${PROTO}\" " >> ../configClients.sh
-done
+
+echo " ssh \$h8x2 \"cd \$CWD/client ; ./config_client.sh udp4\"" >> ../configClients.sh
 
 CWD=`pwd`
 echo "#!/bin/bash" > ../runTrafficClients.sh
 chmod 755 ../runTrafficClients.sh
 echo "source ~/.topology" >> ../runTrafficClients.sh
 echo "CWD=\`pwd\`" >> ../runTrafficClients.sh
-echo "INTERVAL=$INTERVAL"   >> ../runTrafficClients.sh
-echo "if [ \$# -eq 1 ]"      >> ../runTrafficClients.sh
-echo "then"                 >> ../runTrafficClients.sh
-echo "  INTERVAL=\$1"        >> ../runTrafficClients.sh
-echo "fi"                   >> ../runTrafficClients.sh
-
+echo "INTERVAL=10"   >> ../runTrafficClients.sh
 
 ## This creates an array consisting of lower case letters, indexed
 ## from 0
@@ -58,10 +31,10 @@ ALPHA_LIST=(a b c d e f g h i j k l m n o p q r s t u v w x y z)
 k=0
 i=0
 NAME="/"
-while [ $i -lt $NUM_COMPONENTS ]
+while [ $i -lt 3 ]
 do
   j=0
-  while [ $j -lt $COMPONENT_LEN ]
+  while [ $j -lt 5 ]
   do
     NAME="$NAME""${ALPHA_LIST[$k]}"
     j=$(($j+1))
@@ -76,39 +49,15 @@ do
 done
 
 echo "NAME: $NAME"
-#exit 0
-INDEX=0
-HOSTINDEX=0
-while [ $INDEX -ne $COUNT ]
-do
-#echo "INDEX=$INDEX COUNT=$COUNT"
-  if [ $INDEX -lt 10 ]
-  then
-    EXT="00${INDEX}"
-  else if [ $INDEX -lt 100 ]
-    then
-      EXT="0${INDEX}"
-    else
-      EXT="${INDEX}"
-    fi
-  fi
-  FILENAME="NDN_Traffic_Client_$EXT"
-  echo "TrafficPercentage=100" >  $FILENAME
-  #echo "Name=/example/$EXT" >> $FILENAME
-  echo "Name=${NAME}${EXT}" >> $FILENAME
-  echo "MustBeFresh=1" >> $FILENAME
-  echo "NameAppendSequenceNumber=1" >> $FILENAME
-  echo " ssh \$${HOST_LIST[$HOSTINDEX]} \"cd \$CWD/client ; ndn-traffic -i \$INTERVAL $FILENAME >& client_$EXT.log &\"  " >> ../runTrafficClients.sh
 
+FILENAME="NDN_Traffic_Client_000"
+echo "TrafficPercentage=100" >  $FILENAME
+#echo "Name=/example/$EXT" >> $FILENAME
+echo "Name=${NAME}${EXT}" >> $FILENAME
+echo "MustBeFresh=1" >> $FILENAME
+echo "NameAppendSequenceNumber=1" >> $FILENAME
+echo " ssh \$h8x2 \"cd \$CWD/client ; ndn-traffic -i 10 $FILENAME >& client_000.log &\"  " >> ../runTrafficClients.sh
 
-  HOSTINDEX=$(($HOSTINDEX + 1))
-  if [ $HOSTINDEX -ge $NUMHOSTS ]
-  then 
-    HOSTINDEX=0
-  fi
-  INDEX=$(($INDEX + 1))
-
-done
 
 #TrafficPercentage=100
 #Name=/example/A

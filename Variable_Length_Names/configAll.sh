@@ -11,8 +11,9 @@ fi
 
 CWD=`pwd`
 
+echo "configuring Servers"
 ./configServers.sh ${PROTO}
+echo "configuring Clients"
 ./configClients.sh ${PROTO}
-
-#echo "ssh ${!RTR_HOST} \"cd $CWD/rtr; ./configRtr $PROTO\""
-ssh ${!RTR_HOST} "cd $CWD/rtr; ./configRtr.sh $PROTO"
+echo "configuring Routers"
+./configRouters.sh ${PROTO}

@@ -17,8 +17,8 @@ fi
 
 echo "startAll.sh"
 ./startAll.sh 
-echo "configAll.sh"
-./configAll.sh 
+# echo "configAll.sh"
+# ./configAll.sh 
 echo "runTrafficServers.sh"
 ./runTrafficServers.sh 
 echo "runTrafficClients.sh"

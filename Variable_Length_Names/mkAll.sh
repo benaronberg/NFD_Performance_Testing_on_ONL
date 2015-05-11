@@ -37,17 +37,18 @@ else
   exit 0
 fi
 
-pushd rtr
-echo "mkRtr.sh"
-./mkRtr.sh $COUNT $PROTO $NUM_COMPONENTS $COMPONENT_LEN
-popd
+# Hardcoded topology configuration in to configureRouters.sh
+# pushd rtr
+# echo "mkRtr.sh"
+# ./mkRtr.sh #$COUNT $PROTO $NUM_COMPONENTS $COMPONENT_LEN
+# popd
 
 pushd client
 echo "mkClients.sh"
-./mkClients.sh $COUNT $PROTO $INTERVAL $NUM_COMPONENTS $COMPONENT_LEN
+./mkClients.sh #$COUNT $PROTO $INTERVAL $NUM_COMPONENTS $COMPONENT_LEN
 popd
 
 pushd server
 echo "mkServers.sh"
-./mkServers.sh $COUNT $PROTO $NUM_COMPONENTS $COMPONENT_LEN
+./mkServers.sh #$COUNT $PROTO $NUM_COMPONENTS $COMPONENT_LEN
 popd 

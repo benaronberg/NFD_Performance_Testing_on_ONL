@@ -24,10 +24,25 @@ do
   ssh ${!s} "killall nfd"
 done
 
+echo "Kill nfd processes on Rtr"
+#ssh ${!RTR_HOST} "killall nrd"
+for s in $RTR_HOSTS
+do
+  ssh ${!s} "killall nfd"
+done
+
+for s in $RTR_HOSTS
+do
+  ssh ${!s} "killall nlsr"
+done
+
 echo "sleep 10 to give nfd from clients and servers to dump gmon.out if they are. Then rtr can be the last"
 
 sleep 10
+<<<<<<< HEAD
 
 echo "Kill nfd processes on Rtr"
 #ssh ${!RTR_HOST} "killall nrd"
 ssh ${!RTR_HOST} "killall nfd"
+=======
+>>>>>>> 58737cc7f39465d43a12f05cadeff744bd924802
