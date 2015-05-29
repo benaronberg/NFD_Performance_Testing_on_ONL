@@ -86,7 +86,7 @@ def process(keyword, router):
 def write_files():
     for router in routers:
         output = open(router['sitename']+'.conf', "w")
-        template = open("template.conf", "r")
+        template = open("../template.conf", "r")
 
         for line in template:
             line = line.rstrip('\n')

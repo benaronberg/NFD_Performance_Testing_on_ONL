@@ -2,6 +2,7 @@
 
 source ../hosts
 
+rm configClients.sh
 echo "#!/bin/bash" > ../configClients.sh
 chmod 755 ../configClients.sh
 echo "source ~/.topology" >> ../configClients.sh
@@ -9,7 +10,7 @@ echo "CWD=\`pwd\`" >> ../configClients.sh
 
 echo " ssh \$h8x2 \"cd \$CWD/client ; ./config_client.sh udp4\"" >> ../configClients.sh
 
-CWD=`pwd`
+rm runTrafficClients.sh
 echo "#!/bin/bash" > ../runTrafficClients.sh
 chmod 755 ../runTrafficClients.sh
 echo "source ~/.topology" >> ../runTrafficClients.sh

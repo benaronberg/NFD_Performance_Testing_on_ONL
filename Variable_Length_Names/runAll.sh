@@ -16,17 +16,17 @@ else
 fi
 
 echo "startAll.sh"
-./startAll.sh 
+bash -x startAll.sh 
 # echo "configAll.sh"
-# ./configAll.sh 
-echo "runTrafficServers.sh"
-./runTrafficServers.sh 
-echo "runTrafficClients.sh"
-if [ $# -eq 1 ]
-then
-  INTERVAL=$1
-  ./runTrafficClients.sh $INTERVAL 
-else
-  ./runTrafficClients.sh 
-fi
+./configAll.sh 
+#echo "runTrafficServers.sh"
+#./runTrafficServers.sh 
+#echo "runTrafficClients.sh"
+#if [ $# -eq 1 ]
+#then
+#  INTERVAL=$1
+#  ./runTrafficClients.sh $INTERVAL 
+#else
+#  ./runTrafficClients.sh 
+#fi
 

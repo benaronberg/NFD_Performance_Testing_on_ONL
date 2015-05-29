@@ -2,47 +2,36 @@
 
 source ~/.topology
 source hosts
+source helperFunctions
 
 CWD=`pwd`
 
-echo "Kill Traffic"
-./killTraffic.sh
+# --- GET BACK TO THIS ---
+# echo "Kill Traffic"
+# ./killTraffic.sh
 
-echo "Kill nfd processes on Servers"
-# Start Servers
-for s in $SERVER_HOSTS
+killed_nfd=()
+for s in "${ROUTER_HOST_PAIRS[@]}" 
 do
-  #ssh ${!s} "killall nrd"
-  ssh ${!s} "killall nfd"
-done
+  pair_info=(${s//:/ })
+  ROUTER=${pair_info[0]}
+  HOST=${pair_info[1]}
+  
+  echo "$ROUTER, $HOST"
 
-echo "Kill nfd processes on Clients"
-# Start Clients
-for s in $CLIENT_HOSTS
-do
-  #ssh ${!s} "killall nrd"
-  ssh ${!s} "killall nfd"
-done
-
-echo "Kill nfd processes on Rtr"
-#ssh ${!RTR_HOST} "killall nrd"
-for s in $RTR_HOSTS
-do
-  ssh ${!s} "killall nfd"
-done
-
-for s in $RTR_HOSTS
-do
-  ssh ${!s} "killall nlsr"
+  # array_contains defined in helperFunctions
+  if ! array_contains $killed_nfd $ROUTER
+  then
+    # start nfd on ROUTER
+    ssh ${!ROUTER} "killall nfd ;
+                 killall nlsr"
+    killed_nfd+=("$ROUTER")
+  fi
+  # start nfd on HOST
+  ssh ${!HOST} "cd $CWD ; ./start_nfd.sh" 
 done
 
 echo "sleep 10 to give nfd from clients and servers to dump gmon.out if they are. Then rtr can be the last"
 
 sleep 10
-<<<<<<< HEAD
 
-echo "Kill nfd processes on Rtr"
-#ssh ${!RTR_HOST} "killall nrd"
-ssh ${!RTR_HOST} "killall nfd"
-=======
->>>>>>> 58737cc7f39465d43a12f05cadeff744bd924802

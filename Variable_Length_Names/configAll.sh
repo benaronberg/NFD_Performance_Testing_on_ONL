@@ -11,9 +11,12 @@ fi
 
 CWD=`pwd`
 
-echo "configuring Servers"
-./configServers.sh ${PROTO}
-echo "configuring Clients"
-./configClients.sh ${PROTO}
+# echo "configuring Servers"
+# ./configServers.sh ${PROTO}
+# echo "configuring Clients"
+# ./configClients.sh ${PROTO}
+echo "configuring hosts"
+./configHosts.sh ${PROTO}
 echo "configuring Routers"
 ./configRouters.sh ${PROTO}
+

@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+ROUTER_HOST_PAIRS=( "h2x1:h1x1:mccoy"
+                    "h5x2:h6x2:ndn0"
+                    "h7x2:h8x2:titan"
+                    "h10x2:h9x2:wundngw"
+                    "h11x1:h12x1:hobo"
+                    "h20x2:h21x2:ndnx")
 
-CLIENT_HOSTS="h1x1 h2x1 h3x1 h4x1 h5x1 h6x1 "
-SERVER_HOSTS="h1x1 h2x1 h3x1 h4x1 h5x1 h6x1 "
-RTR_HOST="h1x1 h2x1 h3x1 h4x1 h5x1 h6x1 "
-=======
-CLIENT_HOSTS="h8x2"
-SERVER_HOSTS="h4x1"
-RTR_HOSTS="h1x1 h2x1 h3x1 h5x2 h6x1 h7x2 "
->>>>>>> 58737cc7f39465d43a12f05cadeff744bd924802

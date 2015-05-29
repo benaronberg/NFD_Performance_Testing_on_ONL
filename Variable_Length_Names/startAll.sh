@@ -4,37 +4,46 @@ CWD=`pwd`
 
 source ~/.topology
 source hosts
-# Start Servers
-echo "start nfd on all servers"
-for s in $SERVER_HOSTS 
+source routers
+source helperFunctions
+
+# ROUTER_HOST_PAIRS contains 'tuples' of
+#  router-hosts pair names/prefixes. There can be 
+#  duplicate routers but not hosts
+echo "start nfd on all machines"
+
+started_nfd=()
+for s in "${ROUTER_HOST_PAIRS[@]}" 
 do
-  ssh ${!s} "cd $CWD ; ./start_nfd.sh" 
+  pair_info=(${s//:/ })
+  ROUTER=${pair_info[0]}
+  HOST=${pair_info[1]}
+  echo "startAll.sh, nfd: $ROUTER, $HOST"
+  # array_contains defined in helperFunctions
+  if ! array_contains $started_nfd $ROUTER
+  then
+    # start nfd on ROUTER
+    ssh ${!ROUTER} "cd $CWD ; ./start_nfd.sh"
+    started_nfd+=("$ROUTER")
+  fi
+  # start nfd on HOST
+  ssh ${!HOST} "cd $CWD ; ./start_nfd.sh" 
 done
 
-echo "start nfd on all clients"
-for s in $CLIENT_HOSTS 
+
+echo "Sleep so nlsr will be able to start"
+sleep 10
+
+
+# start nlsr on all of the routers
+echo "start nlsr on routers"
+echo ${ROUTER_CONFIG}
+for s in "${ROUTER_CONFIG[@]}"
 do
-  ssh ${!s} "cd $CWD ; ./start_nfd.sh" 
+  router_info=(${s//:/ })
+  HOST=${router_info[2]}
+  NAME=${router_info[1]}
+  echo "startAll.sh, nlsr: $NAME"
+  ssh ${!HOST} "cd $CWD ; nohup nlsr -f ./NLSR_CONF/$NAME.conf > ./NLSR_OUTPUT/$NAME.OUTPUT 2>&1 &"
 done
-
-# Start Rtr
-echo "start nfd on router"
-ssh ${!RTR_HOST} "cd $CWD; ./start_nfd.sh"
-
-#echo "start nrd on all servers"
-#for s in $SERVER_HOSTS 
-#do
-#  ssh ${!s} "cd $CWD ; ./start_nrd.sh" 
-#done
-
-#echo "start nrd on all clients"
-#for s in $CLIENT_HOSTS 
-#do
-#  ssh ${!s} "cd $CWD ; ./start_nrd.sh" 
-#done
-
-# Start Rtr
-#echo "start nrd on router"
-#ssh ${!RTR_HOST} "cd $CWD; ./start_nrd.sh"
-
 

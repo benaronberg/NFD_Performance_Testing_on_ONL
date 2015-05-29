@@ -5,7 +5,7 @@ source ~/.topology
 source hosts
 
 # ROUTER_HOST_PAIRS contains 'tuples' of
-#  router-hosts pair names/prefixes. There can be 
+#  router-hosts pair names. There can be 
 #  duplicate routers but not hosts
 for s in "${ROUTER_HOST_PAIRS[@]}" 
 do
@@ -14,8 +14,8 @@ do
   HOST=${pair_info[1]}
   PREFIX=${pair_info[2]}
   
-  ssh ${!ROUTER} "source ~/.topology;
-               cd $CWD ;
-               nfdc create udp4://$HOST:6363 ;
-               nfdc add-nexthop -c 1 /$PREFIX/ udp4://$HOST:6363" 
+  ssh ${!HOST} "source ~/.topology;
+             cd $CWD ;
+             nfdc create udp4://$ROUTER:6363
+             nfdc add-nexthop -c 1 / udp4://$ROUTER:6363" 
 done
