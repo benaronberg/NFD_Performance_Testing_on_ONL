@@ -7,6 +7,8 @@ source hosts
 # ROUTER_HOST_PAIRS contains 'tuples' of
 #  router-hosts pair names. There can be 
 #  duplicate routers but not hosts
+# 
+# Host file format is [router name]:[host name]:[prefix advertised]
 for s in "${ROUTER_HOST_PAIRS[@]}" 
 do
   pair_info=(${s//:/ })

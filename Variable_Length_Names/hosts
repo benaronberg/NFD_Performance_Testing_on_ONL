@@ -4,4 +4,3 @@ ROUTER_HOST_PAIRS=( "h2x1:h1x1:mccoy"
                     "h10x2:h9x2:wundngw"
                     "h11x1:h12x1:hobo"
                     "h20x2:h21x2:ndnx")
-

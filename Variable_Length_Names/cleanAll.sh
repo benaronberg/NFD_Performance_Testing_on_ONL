@@ -12,3 +12,5 @@ rm server/NDN_Traffic_Server_*
 
 rm client/client*.log
 rm server/server*.log
+
+rm NLSR_OUTPUT/*.OUTPUT

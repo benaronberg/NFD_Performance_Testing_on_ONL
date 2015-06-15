@@ -2,6 +2,10 @@
 
 source ../hosts
 
+# ********************************************************
+# *** This file isn't configured for the runAll script ***
+# ********************************************************
+
 rm configServers.sh
 echo "#!/bin/bash" > ../configServers.sh
 chmod 755 ../configServers.sh

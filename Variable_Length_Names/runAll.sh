@@ -16,9 +16,17 @@ else
 fi
 
 echo "startAll.sh"
-bash -x startAll.sh 
-# echo "configAll.sh"
+./startAll.sh 
+echo "configAll.sh"
 ./configAll.sh 
+
+# *****************************************************************
+# *** I do not have running the server(s)/client(s) as part of  ***
+# *** the script but it should be pretty easy to get them going ***
+# *** doing something similar to below. I deleted the files     ***
+# *** refrenced below from my repo to avoid confusion           ***
+# *****************************************************************
+
 #echo "runTrafficServers.sh"
 #./runTrafficServers.sh 
 #echo "runTrafficClients.sh"

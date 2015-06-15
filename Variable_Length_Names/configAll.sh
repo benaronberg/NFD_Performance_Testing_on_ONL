@@ -11,10 +11,8 @@ fi
 
 CWD=`pwd`
 
-# echo "configuring Servers"
-# ./configServers.sh ${PROTO}
-# echo "configuring Clients"
-# ./configClients.sh ${PROTO}
+# get nfd running on hosts and 
+#  nfd and nlsr running on routers
 echo "configuring hosts"
 ./configHosts.sh ${PROTO}
 echo "configuring Routers"
